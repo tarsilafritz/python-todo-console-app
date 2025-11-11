@@ -16,7 +16,17 @@ def add_task():
     # Add it to the list
     tasksList.append(task)
     print(f"Task '{taskTitle}' ({taskStatus}) added successfully!")
-    
+ 
+#TODO: Mark tasks as complete/incomplete
+def mark_task_done():
+    view_tasks()
+    try:
+        task_num = int(input("Enter the number of the task to mark done: "))
+        tasksList[task_num - 1]["status"] = "done"
+        print("Task updated successfully!")
+    except (ValueError, IndexError):
+        print("Invalid nummber.")
+        
 def view_tasks():
     print("\n# TASKS LIST #")
     if not tasksList:
@@ -37,8 +47,7 @@ def remove_task():
         print(f"Removed task '{removed['title']}'")
     except (ValueError, IndexError):
         print("Invalid task number.")
-    
-
+  
 #def save_tasks():
 
 #def load_tasks():
