@@ -7,13 +7,18 @@ def add_task():
     print("\n# ADD A NEW TASK #")
     taskTitle = input("Title: ").strip()
     taskPriority = input("Priority (high / medium / low): ").strip().lower()
-    valid_priorities = ["high", "medium", "low"]
+    taskStatus = input("Status (pending / in progress / done): ").strip().lower()    
     
+    valid_priorities = ["high", "medium", "low"]
+    valid_statuses = ["peding", "in progress", "done"]
+
     if taskPriority not in valid_priorities:
         print("Invalid priority. Defaulting to 'medium'.")
         taskPriority = "medium"
-    
-    taskStatus = "pending"
+
+    if taskStatus not in valid_statuses:
+        print("Invalid status. Defaulting to 'pending'.")
+        taskStatus = "pending"
     
     # Create a dictionary for the new task
     task = {
@@ -27,16 +32,23 @@ def add_task():
     time.sleep(2)
     print(f"\nTask '{taskTitle}' - {taskPriority} ({taskStatus}) added successfully!")
  
-def mark_task_done():
+def update_status():
+    time.sleep(2)
     view_tasks()
     try:
-        task_num = int(input("Enter the number of the task to mark done: "))
-        tasksList[task_num - 1]["status"] = "done"
-        time.sleep(2)
-        print("\nTask updated successfully!\n")
+        task_num = int(input("Enter the number of the task to update status: "))
+        valid_statuses = ["peding", "in progress", "done"]
+        new_status = input("Enter new status (pending / in progress / done): ").strip().lower()
+        
+        if new_status not in valid_statuses:
+            print("Invalid status. No changes made.")
+            return
+        
+        tasksList[task_num - 1]["status"] = new_status
+        time.sleep(1)
+        print(f"\nTask '{tasksList[task_num - 1]['title']}' updated to '{new_status} successfully!\n")
     except (ValueError, IndexError):
         print("Invalid number.")
-#TODO: add ENUM: in progress, done
         
 def view_tasks():
     print("\n# TASKS LIST #")

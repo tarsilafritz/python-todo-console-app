@@ -14,7 +14,7 @@ while True:
     elif userChoice == 2:
         options.view_tasks()
     elif userChoice == 3:
-        options.mark_task_done()
+        options.update_status()
     elif userChoice == 4:
         options.remove_task()
     elif userChoice == 0:
