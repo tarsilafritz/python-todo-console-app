@@ -1,31 +1,42 @@
+import time
+
 tasksList = []
 
 def add_task():
+    time.sleep(2)
     print("\n# ADD A NEW TASK #")
     taskTitle = input("Title: ").strip()
-    taskStatus = input("Status: ").strip()
+    taskPriority = input("Priority (high / medium / low): ").strip().lower()
+    valid_priorities = ["high", "medium", "low"]
     
-# TODO: colocar status pre-definido como pending
+    if taskPriority not in valid_priorities:
+        print("Invalid priority. Defaulting to 'medium'.")
+        taskPriority = "medium"
+    
+    taskStatus = "pending"
     
     # Create a dictionary for the new task
     task = {
         "title": taskTitle,
-        "status": taskStatus
+        "status": taskStatus,
+        "priority": taskPriority
     }
     
     # Add it to the list
     tasksList.append(task)
-    print(f"Task '{taskTitle}' ({taskStatus}) added successfully!")
+    time.sleep(2)
+    print(f"\nTask '{taskTitle}' - {taskPriority} ({taskStatus}) added successfully!")
  
-#TODO: Mark tasks as complete/incomplete
 def mark_task_done():
     view_tasks()
     try:
         task_num = int(input("Enter the number of the task to mark done: "))
         tasksList[task_num - 1]["status"] = "done"
-        print("Task updated successfully!")
+        time.sleep(2)
+        print("\nTask updated successfully!\n")
     except (ValueError, IndexError):
-        print("Invalid nummber.")
+        print("Invalid number.")
+#TODO: add ENUM: in progress, done
         
 def view_tasks():
     print("\n# TASKS LIST #")
@@ -35,8 +46,9 @@ def view_tasks():
     else:
         for i, task in enumerate(tasksList, start=1):
             title = task.get("title", "<no title>")
+            priority = task.get("priority", "<no priority>")
             status = task.get("status", "<no status>")
-            print(f"{i}. {title} ({status})")
+            print(f"{i}. {title} - {priority} ({status})")
 
 def remove_task():
     print("\n# DELETE TASK#")
