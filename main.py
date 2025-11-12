@@ -3,6 +3,7 @@ import menu
 from storage import load_tasks, save_tasks
 
 load_tasks()
+print(f"Loaded {len(options.storage.tasksList)} tasks from file.")
 
 while True:       
     menu.show_menu()    

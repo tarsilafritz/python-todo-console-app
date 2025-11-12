@@ -33,7 +33,6 @@ def load_tasks():
     try:
         with open(DATA_FILE, "r", encoding="utf-8") as file:
             tasksList = json.load(file)
-        # print("\nTasks loaded successfully!\n")
     except json.JSONDecodeError:
         print("Error: tasks.json file is corrupted or not valid JSON.")
         tasksList = []
