@@ -1,5 +1,8 @@
 import options
 import menu
+from storage import load_tasks, save_tasks
+
+load_tasks()
 
 while True:       
     menu.show_menu()    
@@ -18,7 +21,8 @@ while True:
     elif userChoice == 4:
         options.remove_task()
     elif userChoice == 0:
-        print("Exiting program...")
+        print("Saving tasks and exiting program...")
+        save_tasks()
         break
     else:
         print("Invalid option, please choose again.")

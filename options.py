@@ -1,6 +1,5 @@
 import time
-
-tasksList = []
+import storage
 
 def add_task():
     time.sleep(2)
@@ -10,7 +9,7 @@ def add_task():
     taskStatus = input("Status (pending / in progress / done): ").strip().lower()    
     
     valid_priorities = ["high", "medium", "low"]
-    valid_statuses = ["peding", "in progress", "done"]
+    valid_statuses = ["pending", "in progress", "done"]
 
     if taskPriority not in valid_priorities:
         print("Invalid priority. Defaulting to 'medium'.")
@@ -28,7 +27,8 @@ def add_task():
     }
     
     # Add it to the list
-    tasksList.append(task)
+    storage.tasksList.append(task)
+    # storage.save_tasks()    
     time.sleep(2)
     print(f"\nTask '{taskTitle}' - {taskPriority} ({taskStatus}) added successfully!")
  
@@ -37,26 +37,27 @@ def update_status():
     view_tasks()
     try:
         task_num = int(input("Enter the number of the task to update status: "))
-        valid_statuses = ["peding", "in progress", "done"]
+        valid_statuses = ["pending", "in progress", "done"]
         new_status = input("Enter new status (pending / in progress / done): ").strip().lower()
         
         if new_status not in valid_statuses:
             print("Invalid status. No changes made.")
             return
         
-        tasksList[task_num - 1]["status"] = new_status
+        storage.tasksList[task_num - 1]["status"] = new_status
+        # storage.save_tasks()
         time.sleep(1)
-        print(f"\nTask '{tasksList[task_num - 1]['title']}' updated to '{new_status} successfully!\n")
+        print(f"\nTask '{storage.tasksList[task_num - 1]['title']}' updated to '{new_status}' successfully!\n")
     except (ValueError, IndexError):
         print("Invalid number.")
         
 def view_tasks():
     print("\n# TASKS LIST #")
-    if not tasksList:
+    if not storage.tasksList:
         print("No tasks yet.")
         return
     else:
-        for i, task in enumerate(tasksList, start=1):
+        for i, task in enumerate(storage.tasksList, start=1):
             title = task.get("title", "<no title>")
             priority = task.get("priority", "<no priority>")
             status = task.get("status", "<no status>")
@@ -67,11 +68,8 @@ def remove_task():
     view_tasks()
     try:
         task_num = int(input("Enter the task number to delete: "))
-        removed = tasksList.pop(task_num - 1)
+        removed = storage.tasksList.pop(task_num - 1)
+        # storage.save_tasks()
         print(f"Removed task '{removed['title']}'")
     except (ValueError, IndexError):
         print("Invalid task number.")
-  
-#def save_tasks():
-
-#def load_tasks():
