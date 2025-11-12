@@ -78,8 +78,8 @@ python-todo-console/
 
 ### 1. Clone or download this repository
 ```bash
-git clone https://github.com/tarsilafritz/python-todo-console.git
-cd python-todo-console
+git clone https://github.com/tarsilafritz/todo-console-app.git
+cd todo-console-app
 ```
 ### 2. Run the script
 ```bash
