@@ -14,8 +14,10 @@ Through this project, I aimed to:
 - Practice Python syntax and basic structure  
 - Reinforce understanding of **variables**, **data types**, and **type conversion**  
 - Work with **loops** and **conditional statements**  
-- Handle **user input** and prevent program crashes with **error handling**  
-  
+- Handle **user input** and prevent program crashes with **error handling**
+- Apply **modularization** by separating logic into multiple Python files
+- Learn how to **save and load data** using JSON files for persistence
+
 ---
 
 ## 🧩 Features
